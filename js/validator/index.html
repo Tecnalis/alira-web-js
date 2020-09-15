@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<script src="validator.js"></script>
+		<style>
+			.fail {
+				color: red;
+			}
+
+			.success {
+				color: green;
+			}
+
+			.form-field p {
+				display: none;
+			}
+
+			input + p.fail,
+			p:not(.fail) + p.fail {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="name-div" class="form-field">
+			<label>
+				Name
+				<input id="name-field" type="text">
+				<p class="fail">Mínimo 6 caracteres</p>
+				<p class="fail">No debe empezar por número</p>
+			</label>
+		</div>
+		<div id="password-div" class="form-field">
+			<label>
+				Password
+				<input id="password-field" type="password">
+				<p class="fail">Mínimo 6 caracteres</p>
+				<p class="fail">Mínimo una minúscula</p>
+				<p class="fail">Mínimo una mayúscula</p>
+				<p class="fail">Mínimo un número</p>
+			</label>
+		</div>
+	</body>
+	<script>
+		let nameTests = [
+			{type: 'length', min: 6, max: 1000},
+			{type: 'initType', charType: 'number', isOfChar: false}
+		];
+		let nameConfig = {
+			event: 'keyup',
+			input: {
+				successClass: 'success',
+				failClass: 'fail'
+			},
+			messages: {
+				selector: '#name-div p',
+				successClass: 'success',
+				failClass: 'fail'
+			}
+		}
+		Validator.addObserver(document.getElementById('name-field'), nameTests, nameConfig);
+	</script>
+</html>

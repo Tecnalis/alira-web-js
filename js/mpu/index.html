@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<script src="../cookies/cookies.js"></script>
+		<script src="mpu.js"></script>
+		<style>
+			#mpuParent {
+				display: block;
+				position: absolute;
+				z-index: 100;
+				top: 100;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 300px;
+				height: 250px;
+				background-color: #f00;
+				color: #fff;
+				border: 1px solid firebrick;
+				border-radius: 10px;
+			}
+
+			#mpuLoading {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<button onclick="mpu.add('content 1.html')">MPU 1</button>
+		<button onclick="mpu.add('content 2.html', false)">MPU 2</button>
+		<button onclick="mpu.add('content 2.html', false, 'test', 1)">MPU 2 con cookie</button>
+	</body>
+	<template id="mpu">
+		<mpu id="mpuParent">
+			<button id="mpuClose">CLOSE</button>
+			<div id="mpuLoading">Loading...</div>
+			<div id="mpuContent"></div>
+		</mpu>
+	</template>
+	<script>
+		var mpu = new MPU('mpu');
+	</script>
+</html>
