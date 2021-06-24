@@ -85,6 +85,7 @@ class MPU{
 			let parser = new DOMParser();
 			let body = await response.text();
 			let doc = parser.parseFromString(body, 'text/html');
+			this.mpuContent.innerHTML = "";
 			this.mpuContent.appendChild(doc.body);
 			this.mpuLoading.style.display = 'none';
 		}else{
