@@ -32,6 +32,7 @@ class MPU{
 		this.#contentDivID = config.contentDivID || 'mpuContent';
 		this.#loadingDivID = config.loadingDivID || 'mpuLoading';
 		this.#status = this.#status_CLOSED;
+		return this;
 	}
 
 	add(url, canClose = true, cookieID = '', cookieDays = 0){
@@ -81,8 +82,10 @@ class MPU{
 		let url = newElement.url;
 		let response = await fetch(url);
 		if (response.ok){
+			let parser = new DOMParser();
 			let body = await response.text();
-			this.mpuContent.innerHTML = body;
+			let doc = parser.parseFromString(body, 'text/html');
+			this.mpuContent.appendChild(doc.body);
 			this.mpuLoading.style.display = 'none';
 		}else{
 			console.error(`Error loading ${url} in MPU`);
